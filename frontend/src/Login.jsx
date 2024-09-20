@@ -79,7 +79,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn, setLoggedInUserEmail }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -90,6 +90,7 @@ function Login({ setIsLoggedIn }) {
       .then(result => {
         if (result.data.status === "Success") {
           setIsLoggedIn(true); // Set login state to true
+          setLoggedInUserEmail(email); // Set logged-in user's email
           navigate('/home');
         } else {
           console.log(result.data.status); // Handle login failure
