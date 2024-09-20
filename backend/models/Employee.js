@@ -17,7 +17,9 @@ const EmployeeSchema = new mongoose.Schema({
     password: String,
     dateOfBirth: Date,  // New field
     address: String,    // New field
-    phoneNumber: String // New field (optional)
+    phoneNumber: String, // New field (optional)
+    department : String,
+    position : String
 })
 
 const EmployeeModel = mongoose.model("employees", EmployeeSchema)

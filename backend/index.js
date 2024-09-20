@@ -85,12 +85,12 @@ app.post('/register', (req, res) => {
 
 // New route to update user information
 app.post('/updateProfile', (req, res) => {
-    const { email, dateOfBirth, address, phoneNumber } = req.body;
+    const { email, dateOfBirth, address, phoneNumber, department, position } = req.body;
 
     // Find the user by email and update the new fields
     EmployeeModel.findOneAndUpdate(
         { email: email }, 
-        { dateOfBirth, address, phoneNumber }, 
+        { dateOfBirth, address, phoneNumber, department, position }, 
         { new: true } // Return the updated document
     )
     .then(updatedUser => res.json({ status: "Profile updated", user: updatedUser }))
