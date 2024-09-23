@@ -74,7 +74,7 @@ function UpdateUser({ userToEdit, updateUser }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
-  const [role, setRole] = useState('User');
+//   const [role, setRole] = useState('User');
 
   // Pre-fill form with existing user data
   useEffect(() => {
@@ -82,13 +82,13 @@ function UpdateUser({ userToEdit, updateUser }) {
       setName(userToEdit.Name);
       setEmail(userToEdit.Email);
       setAge(userToEdit.Age);
-      setRole(userToEdit.Role);
+      
     }
   }, [userToEdit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedUser = { Name: name, Email: email, Age: age, Role: role };
+    const updatedUser = { Name: name, Email: email, Age: age};
     updateUser(updatedUser); // Pass the updated user data back to the parent component
   };
 
@@ -127,7 +127,7 @@ function UpdateUser({ userToEdit, updateUser }) {
               onChange={(e) => setAge(e.target.value)}
             />
           </div>
-          <div className="mb-2">
+          {/* <div className="mb-2">
             <label htmlFor="role">Role</label>
             <select
               value={role}
@@ -137,7 +137,7 @@ function UpdateUser({ userToEdit, updateUser }) {
               <option value="User">User</option>
               <option value="Admin">Admin</option>
             </select>
-          </div>
+          </div> */}
           <button className="btn btn-success" type="submit">
             Save Changes
           </button>

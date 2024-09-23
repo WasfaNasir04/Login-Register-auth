@@ -17,8 +17,15 @@ app.use(cors({
 
 mongoose.connect("mongodb://localhost:27017/employee");
 
+//user creation crud
 app.post("/createuser", (req, res) =>{
     UserModel.create(req.body)
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+})
+
+app.get('/users', (req, res) =>{
+    UserModel.find({})
     .then(users => res.json(users))
     .catch(err => res.json(err))
 })
