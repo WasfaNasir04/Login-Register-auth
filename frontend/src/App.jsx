@@ -5,6 +5,9 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './Login'
 import Home from './Home'
 import axios from 'axios'; //new
+import Users from './Users';
+import CreateUsers from './CreateUsers';
+import UpdateUsers from './UpdateUsers';
 
 
 function App() {
@@ -22,7 +25,9 @@ function App() {
           path='/home'
           element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userEmail={loggedInUserEmail} />}
         />
-        {/* <Route path='/home' element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} /> */}
+       <Route path='/users' element={<Users />} />
+       <Route path='/createuser' element={<CreateUsers />} />
+       <Route path='/updateuser' element={<UpdateUsers />} />
       </Routes>
     </BrowserRouter>
   )

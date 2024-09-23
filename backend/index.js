@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const session = require("express-session");  //new
 const MongoStore = require("connect-mongo");  //new
-const EmployeeModel = require('./models/Employee')
+const EmployeeModel = require('./models/Employee');
+const UserModel = require('./models/Users');
 
 const app = express()
 app.use(express.json())
@@ -15,6 +16,12 @@ app.use(cors({
 }));
 
 mongoose.connect("mongodb://localhost:27017/employee");
+
+app.post("/createuser", (req, res) =>{
+    UserModel.create(req.body)
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+})
 
 //new
 // Setup session management
