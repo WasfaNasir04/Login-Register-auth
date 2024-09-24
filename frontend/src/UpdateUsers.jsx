@@ -68,34 +68,43 @@
 
 // export default UpdateUsers;
 
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState}from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-function UpdateUser({ userToEdit, updateUser }) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
-//   const [role, setRole] = useState('User');
+function UpdateUser() {
+
+  const {id} = useParams()
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [age, setAge] = useState();
+  const navigate = useNavigate();
 
   // Pre-fill form with existing user data
   useEffect(() => {
-    if (userToEdit) {
-      setName(userToEdit.Name);
-      setEmail(userToEdit.Email);
-      setAge(userToEdit.Age);
-      
-    }
-  }, [userToEdit]);
+    axios.get('http://localhost:3001/getUser/'+id)
+    .then(result => {console.log(result)
+      setName(result.data.name)
+      setEmail(result.data.email)
+      setAge(result.data.age)
+    })
+        .catch(err => console.log(err));
+}, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const updatedUser = { Name: name, Email: email, Age: age};
-    updateUser(updatedUser); // Pass the updated user data back to the parent component
-  };
+const Update = (e) => {
+  e.preventDefault();
+    axios.put("http://localhost:3001/updateuser/"+id, {name,email,age})
+    .then(result => {
+        console.log(result)
+        navigate('/users')
+    })
+    .catch(err => console.log(err))
+}
 
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={Update}>
           <h2>Edit User</h2>
           <div className="mb-2">
             <label htmlFor="name">Name</label>
@@ -103,7 +112,7 @@ function UpdateUser({ userToEdit, updateUser }) {
               type="text"
               placeholder="Enter Name"
               className="form-control"
-              value={name}
+              value = {name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -114,7 +123,7 @@ function UpdateUser({ userToEdit, updateUser }) {
               placeholder="Enter Email"
               className="form-control"
               value={email}
-              disabled // Email is the unique identifier, so it cannot be changed
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-2">
@@ -139,7 +148,7 @@ function UpdateUser({ userToEdit, updateUser }) {
             </select>
           </div> */}
           <button className="btn btn-success" type="submit">
-            Save Changes
+            Update
           </button>
         </form>
       </div>

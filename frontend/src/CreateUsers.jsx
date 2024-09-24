@@ -43,9 +43,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function CreateUsers() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [age, setAge] = useState();
   const navigate = useNavigate();
   //const [role, setRole] = useState('User'); // Default role
 
