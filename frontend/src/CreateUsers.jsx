@@ -46,12 +46,13 @@ function CreateUsers() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [age, setAge] = useState();
+  const [role, setRole] = useState('User');
   const navigate = useNavigate();
   //const [role, setRole] = useState('User'); // Default role
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/createuser", {name,email,age})
+    axios.post("http://localhost:3001/createuser", {name,email,age,role})
     .then(result => {
         console.log(result)
         navigate('/users')
@@ -94,17 +95,17 @@ function CreateUsers() {
               onChange={(e) => setAge(e.target.value)}
             />
           </div>
-          {/* <div className="mb-2">
+          <div className="mb-2">
             <label htmlFor="role">Role</label>
             <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
               className="form-control"
+              value={role}
+              onChange={(e) => setRole(e.target.value)} // handle role selection
             >
               <option value="User">User</option>
               <option value="Admin">Admin</option>
             </select>
-          </div> */}
+          </div>
           <button className="btn btn-success" type="submit">Submit</button>
         </form>
       </div>

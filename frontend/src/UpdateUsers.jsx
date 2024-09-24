@@ -78,6 +78,7 @@ function UpdateUser() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [age, setAge] = useState();
+  const [role, setRole] = useState('User'); 
   const navigate = useNavigate();
 
   // Pre-fill form with existing user data
@@ -87,13 +88,14 @@ function UpdateUser() {
       setName(result.data.name)
       setEmail(result.data.email)
       setAge(result.data.age)
+      setRole(result.data.role)
     })
         .catch(err => console.log(err));
 }, [])
 
 const Update = (e) => {
   e.preventDefault();
-    axios.put("http://localhost:3001/updateuser/"+id, {name,email,age})
+    axios.put("http://localhost:3001/updateuser/"+id, {name,email,age,role})
     .then(result => {
         console.log(result)
         navigate('/users')
@@ -136,17 +138,17 @@ const Update = (e) => {
               onChange={(e) => setAge(e.target.value)}
             />
           </div>
-          {/* <div className="mb-2">
+          <div className="mb-2">
             <label htmlFor="role">Role</label>
             <select
+              className="form-control"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="form-control"
             >
               <option value="User">User</option>
               <option value="Admin">Admin</option>
             </select>
-          </div> */}
+          </div>
           <button className="btn btn-success" type="submit">
             Update
           </button>

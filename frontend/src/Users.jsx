@@ -31,7 +31,8 @@ const handleDelete = (id) =>
                     <tr>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Age</th>    
+                      <th>Age</th>  
+                      <th>Role</th>  
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -42,7 +43,7 @@ const handleDelete = (id) =>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                         <td>{user.age}</td>
-                        
+                        <td>{user.role}</td>
                         <td>
                           <Link to={`/updateuser/${user._id}`} className="btn btn-warning me-2"> Update</Link>
                           <button className='btn btn-danger'
